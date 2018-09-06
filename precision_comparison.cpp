@@ -1,6 +1,9 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <stdio.h>
+
+using namespace std;
 
 typedef double (* vFunctionCall)(int args);
 
