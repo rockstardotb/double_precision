@@ -2,6 +2,7 @@
 #include <string>
 #include <cmath>
 #include <stdio.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -33,11 +34,12 @@ public:
 	double delta_x;
 	double x_o;
         converged = false;
+	count = 0;
         for(int i=0 ; i <= max_iter ; i++){
 	    x_o = x_i;
             x_i = func_g(res,res_prime,x_i,guess);
             delta_x = abs(x_o - x_i)/x_o;
-            count = i + 1;
+            count++;
             if(delta_x < pow(10,-9)){
                 converged = true;
                 break;
@@ -46,7 +48,9 @@ public:
     }
     void show(){
 	if(converged){
-        	std::cout << x_i;
+		std::cout << setprecision(8);
+		std::cout << "g(x) converged in " << count << " iterations:\n";
+        	std::cout << "x = " << x_i;
         	std::cout << "\n";
 	}
 	else{
@@ -85,7 +89,7 @@ int main()
     Fun resulta;
     resulta.res = (vFunctionCall)func_a;
     resulta.res_prime = (vFunctionCall)func_a_prime;
-    resulta.guess = 2.582000001;
+    resulta.guess = -0.9;
     resulta.max_iter = 100000;
     resulta.fpi();
     resulta.show();
@@ -95,7 +99,7 @@ int main()
     Fun resultb;
     resultb.res = (vFunctionCall)func_b;
     resultb.res_prime = (vFunctionCall)func_b_prime;
-    resultb.guess = 2.582000001;
+    resultb.guess = -1.0;
     resultb.max_iter = 100000;
     resultb.fpi();
     resultb.show();
@@ -106,8 +110,8 @@ int main()
     Fun resultc;
     resultc.res = (vFunctionCall)func_c;
     resultc.res_prime = (vFunctionCall)func_c_prime;
-    resultc.guess = 2.58200001;
-    resultc.max_iter = 100000;
+    resultc.guess = 1.6;
+    resultc.max_iter = 10000;
     resultc.fpi();
     resultc.show();
     std::cout << "\n";
