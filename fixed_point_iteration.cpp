@@ -35,10 +35,10 @@ public:
 	double x_o;
         converged = false;
 	count = 0;
-        for(int i=0 ; i <= max_iter ; i++){
+        for(int i=1 ; i <= max_iter ; i++){
 	    x_o = x_i;
             x_i = func_g(res,res_prime,x_i,guess);
-            delta_x = abs(x_o - x_i)/x_o;
+            delta_x = abs(x_o - x_i);
             count++;
             if(delta_x < pow(10,-9)){
                 converged = true;
@@ -54,7 +54,8 @@ public:
         	std::cout << "\n";
 	}
 	else{
-		std::cout << "Function does not converge\n";
+		std::cout << "Function did not converge after ";
+		std::cout << count << " iterations.\n";
 	}
     }
 };
@@ -111,7 +112,7 @@ int main()
     resultc.res = (vFunctionCall)func_c;
     resultc.res_prime = (vFunctionCall)func_c_prime;
     resultc.guess = 1.6;
-    resultc.max_iter = 10000;
+    resultc.max_iter = 100000;
     resultc.fpi();
     resultc.show();
     std::cout << "\n";
